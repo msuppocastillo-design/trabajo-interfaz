@@ -27,7 +27,7 @@ public class Lobo extends Animal implements Peligroso {
     public void comer(Ecosistema eco) {
         Conejo objetivo = eco.buscarConejoVivoAleatorio();
         if (objetivo == null) {
-            System.out.println("Lobo '" + getNombre() + "' no encontró presas.");
+            System.out.println("Lobo '" + getNombre() + "' no encontró sus presas.");
             return;
         }
 
@@ -43,11 +43,11 @@ public class Lobo extends Animal implements Peligroso {
             setEnergia(getEnergia() + GANANCIA_CAZA_EXITOSA);
             exitosCaza++;
             eco.registrarMuerte(objetivo);
-            System.out.println("Lobo '" + getNombre() + "' cazó a Conejo '" + objetivo.getNombre()
+            System.out.println("Lobo '" + getNombre() + "' cazó a un Conejo '" + objetivo.getNombre()
                     + "' (+" + (int) GANANCIA_CAZA_EXITOSA + " energia) [cacerías: " + exitosCaza + "]");
             eco.contarEvento();
         } else {
-            System.out.println("Lobo '" + getNombre() + "' falló la caza");
+            System.out.println("Lobo '" + getNombre() + "' falló en la caceria");
             eco.contarEvento();
         }
     }

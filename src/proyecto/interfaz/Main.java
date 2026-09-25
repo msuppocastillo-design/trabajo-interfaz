@@ -16,11 +16,11 @@ public class Main {
         System.out.println("=========================================\n");
 
         Ecosistema eco = configurarEcosistema();
-        int turnosTotales = pedirEntero("Cantidad de turnos totales de la simulación (10-50): ", 10, 50);
+        int turnosTotales = pedirEntero("La cantidad de turnos totales de la simulación (10-50): ", 10, 50);
 
         System.out.println("\n¿Confirmar configuración e iniciar la simulación? (s/n)");
         if (!leerConfirmacion()) {
-            System.out.println("Simulación cancelada.");
+            System.out.println("La simulación ha sido cancelada.");
             return;
         }
 
@@ -30,7 +30,7 @@ public class Main {
             eco.procesarTurno();
 
             if (eco.ecosistemaColapsado()) {
-                causaFin = "Colapso del ecosistema (se extinguieron: " + eco.poblacionExtinta() + ")";
+                causaFin = "Se colapso el ecosistema (se extinguieron: " + eco.poblacionExtinta() + ")";
                 break;
             }
 
@@ -130,17 +130,17 @@ public class Main {
         switch (opcion) {
             case "1": {
                 Clima nuevo = pedirClima();
-                System.out.println("¿Confirmar cambio de clima a " + nuevo.getNombreLegible() + "? (s/n)");
+                System.out.println("¿Confirmar cambio de clima actual " + nuevo.getNombreLegible() + "? (s/n)");
                 if (leerConfirmacion()) {
                     eco.cambiarClima(nuevo);
                 }
                 break;
             }
             case "2": {
-                System.out.print("¿Qué entidad agregar? (planta/conejo/lobo): ");
+                System.out.print("¿Qué entidad quiere agregar? (planta/conejo/lobo): ");
                 String tipo = scanner.nextLine().trim().toLowerCase();
                 if (!tipo.equals("planta") && !tipo.equals("conejo") && !tipo.equals("lobo")) {
-                    System.out.println("Tipo inválido, no se agregó nada.");
+                    System.out.println("Tipo inválido, no se pudo agregar nada.");
                     break;
                 }
                 if (tipo.equals("lobo") && eco.getLobosAgregadosHistorico() >= Ecosistema.MAX_LOBOS_TOTAL) {

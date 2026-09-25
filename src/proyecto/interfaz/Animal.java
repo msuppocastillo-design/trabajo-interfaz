@@ -19,7 +19,7 @@ public abstract class Animal extends Entidad implements Mortal {
 
     /** Método concreto compartido: todo animal puede desplazarse. */
     public void moverse() {
-        System.out.println(getNombre() + " se desplazó por el ecosistema.");
+        System.out.println(getNombre() + " se movio por el ecosistema.");
     }
 
     // ---- Implementación común de Mortal ----
