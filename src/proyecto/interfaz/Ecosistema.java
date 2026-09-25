@@ -51,7 +51,7 @@ public class Ecosistema {
         muertes.put("Lobo", 0);
     }
 
-    // ---------------- Generación de nombres únicos ----------------
+    // ---------------- pone nombre a las coasas----------------
 
     public String generarNombrePlanta() {
         return "Helecho-" + (++contadorPlanta);
@@ -67,7 +67,7 @@ public class Ecosistema {
         return base[random.nextInt(base.length)] + "-" + (++contadorLobo);
     }
 
-    // ---------------- Alta de entidades (config inicial + intervención) ----------------
+  
 
     /** Sobrecarga 1: agrega una entidad con energía inicial aleatoria por defecto. */
     public boolean agregarEntidad(String tipo) {
@@ -260,7 +260,7 @@ public class Ecosistema {
         return total;
     }
 
-    // ---------------- Getters / intervención ----------------
+   
 
     public ArrayList<Planta> getPlantas() { return plantas; }
     public ArrayList<Conejo> getConejos() { return conejos; }
@@ -291,7 +291,7 @@ public class Ecosistema {
                 + "  Lobos: " + contarVivas(lobos) + "  Clima: " + climaActual.getNombreLegible());
     }
 
-    // ---------------- Reporte final ----------------
+    // ---------------- reporte ----------------
 
     public void generarReporteFinal(String causaFin) {
         System.out.println("\n================= REPORTE FINAL =================");

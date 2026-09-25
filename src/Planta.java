@@ -1,21 +1,15 @@
 import java.util.Random;
 
-/**
- * Entidad productora del ecosistema. Se reproduce según su energía y el clima actual.
- *
- * Nota de diseño: la interface Reproducible define puedeReproducirse() SIN parámetros,
- * así que ahí solo chequeamos la condición interna (energía suficiente). El efecto del
- * clima (multiplicador de reproducción, o directamente "no se reproduce" en Invierno)
- * se resuelve dentro de reproducirse(eco), que sí recibe el Ecosistema.
- */
+
+ 
 public class Planta extends Entidad implements Reproducible {
 
     private int tamanio; // 1 a 5, afecta la energía que da al ser comida
-    private static final double ENERGIA_MIN_PARA_REPRODUCIR = 30.0;
-    private static final double COSTO_REPRODUCCION = 15.0;
-    private static final double PROB_BASE_REPRODUCCION = 0.35;
+    private static final double ENERGIA_MIN_PARA_REPRODUCIR = 25.0;
+    private static final double COSTO_REPRODUCCION = 10.0;
+    private static final double PROB_BASE_REPRODUCCION = 0.40;
     private static final Random RANDOM = new Random();
-
+ // mejoras a las pendejas de las plantas 
     public Planta(String nombre, double energiaInicial, int tamanio) {
         super(nombre, energiaInicial);
         setTamanio(tamanio);
