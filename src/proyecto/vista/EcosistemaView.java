@@ -35,6 +35,7 @@ public class EcosistemaView extends javax.swing.JFrame {
         );
 
         pack();
+    }
 
     /**
      * @param args the command line arguments
