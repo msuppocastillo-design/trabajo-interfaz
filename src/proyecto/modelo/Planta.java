@@ -1,7 +1,7 @@
+package modelo;
+
 import java.util.Random;
 
-
- 
 public class Planta extends Entidad implements Reproducible {
 
     private int tamanio; // 1 a 5, afecta la energía que da al ser comida
@@ -9,15 +9,13 @@ public class Planta extends Entidad implements Reproducible {
     private static final double COSTO_REPRODUCCION = 10.0;
     private static final double PROB_BASE_REPRODUCCION = 0.40;
     private static final Random RANDOM = new Random();
- // mejoras a las pendejas de las plantas 
+
     public Planta(String nombre, double energiaInicial, int tamanio) {
         super(nombre, energiaInicial);
         setTamanio(tamanio);
     }
 
-    public int getTamanio() {
-        return tamanio;
-    }
+    public int getTamanio() { return tamanio; }
 
     public void setTamanio(int tamanio) {
         this.tamanio = Math.max(1, Math.min(5, tamanio));
@@ -25,19 +23,16 @@ public class Planta extends Entidad implements Reproducible {
 
     @Override
     public void actuar(Ecosistema eco) {
-        // El default de Reproducible ya hace: si puedeReproducirse() -> reproducirse(eco)
         intentarReproduccion(eco);
     }
 
     @Override
-    public void mostrarEstado() {
-        System.out.printf("Planta '%s' (tamaño:%d, energia:%.1f)%n", getNombre(), tamanio, getEnergia());
-    }
+    public String getTipo() { return "Planta"; }
 
-    /**
-     * La planta es comida: pierde toda su energía y muere, y retorna el valor
-     * nutritivo que le da a quien la come (tamanio * 10).
-     */
+    @Override
+    public String getDetalle() { return "Tamaño " + tamanio; }
+
+    /** La planta es comida: pierde toda su energía, muere y devuelve su valor nutritivo (tamaño * 10). */
     public double serComida() {
         double valorNutritivo = tamanio * 10.0;
         setEnergia(0);
@@ -72,9 +67,8 @@ public class Planta extends Entidad implements Reproducible {
             double energiaHija = 20 + RANDOM.nextInt(21); // 20-40
             Planta hija = new Planta(eco.generarNombrePlanta(), energiaHija, tamanioHija);
             eco.registrarNacimiento(hija);
-            System.out.println("Planta '" + getNombre() + "' se reprodujo -> nueva planta '"
-                    + hija.getNombre() + "' (energia: " + (int) energiaHija + ")");
-            eco.contarEvento();
+            eco.registrarEvento("Planta '" + getNombre() + "' se reprodujo -> nueva planta '"
+                    + hija.getNombre() + "' (energía: " + (int) energiaHija + ")");
         }
     }
 }

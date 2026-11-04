@@ -1,14 +1,12 @@
+package modelo;
+
 import java.util.List;
 import java.util.Random;
 
 /**
- * Herbívoro del ecosistema. Come plantas y, si le queda suficiente energía,
- * intenta reproducirse.
- *
- * Nota de diseño: al igual que en Planta, puedeReproducirse() (sin parámetros)
- * solo valida la condición interna (energía > 60). La condición "debe existir
- * al menos otro conejo vivo" se valida dentro de reproducirse(eco), ya que ahí
- * sí tenemos acceso al Ecosistema.
+ * Herbívoro del ecosistema. Come plantas y, si le queda energía, intenta reproducirse.
+ * puedeReproducirse() solo valida la condición interna (energía > 60); que exista otro
+ * conejo vivo se valida en reproducirse(eco), donde hay acceso al Ecosistema.
  */
 public class Conejo extends Animal implements Reproducible {
 
@@ -34,37 +32,28 @@ public class Conejo extends Animal implements Reproducible {
     public void comer(Ecosistema eco) {
         Planta objetivo = eco.buscarPlantaVivaAleatoria();
         if (objetivo != null) {
-            double valor = objetivo.serComida(); // puede ser negativo si era venenosa
+            double valor = objetivo.serComida();
+            eco.registrarMuerte(objetivo);
             setEnergia(getEnergia() + valor);
-            if (valor >= 0) {
-                System.out.println("Conejo '" + getNombre() + "' comió '" + objetivo.getNombre()
-                        + "' (+" + (int) valor + " energia)");
-            } else {
-                System.out.println("Conejo '" + getNombre() + "' comió '" + objetivo.getNombre()
-                        + "' y era venenosa (" + (int) valor + " energia)");
-            }
-            eco.contarEvento();
+            eco.registrarEvento("Conejo '" + getNombre() + "' comió '" + objetivo.getNombre()
+                    + "' (+" + (int) valor + " energía)");
         } else {
             setEnergia(getEnergia() - PERDIDA_SIN_COMIDA);
-            System.out.print("Conejo '" + getNombre() + "' no encontró comida (-"
-                    + (int) PERDIDA_SIN_COMIDA + " energia)");
-            imprimirPeligroSiCorresponde();
-            eco.contarEvento();
-        }
-    }
-
-    private void imprimirPeligroSiCorresponde() {
-        if (getEnergia() < UMBRAL_PELIGRO) {
-            System.out.println(" [PELIGRO: energia=" + (int) getEnergia() + "]");
-        } else {
-            System.out.println();
+            String texto = "Conejo '" + getNombre() + "' no encontró comida (-"
+                    + (int) PERDIDA_SIN_COMIDA + " energía)";
+            if (getEnergia() < UMBRAL_PELIGRO) {
+                texto += " [PELIGRO: energía=" + (int) getEnergia() + "]";
+            }
+            eco.registrarEvento(texto);
         }
     }
 
     @Override
-    public void mostrarEstado() {
-        String peligro = getEnergia() < UMBRAL_PELIGRO ? " [EN PELIGRO]" : "";
-        System.out.printf("Conejo '%s' (energia:%.1f)%s%n", getNombre(), getEnergia(), peligro);
+    public String getTipo() { return "Conejo"; }
+
+    @Override
+    public String getDetalle() {
+        return getEnergia() < UMBRAL_PELIGRO ? "EN PELIGRO" : "Estable";
     }
 
     @Override
@@ -90,8 +79,7 @@ public class Conejo extends Animal implements Reproducible {
         double energiaHijo = 25 + RANDOM.nextInt(16); // 25-40
         Conejo hijo = new Conejo(eco.generarNombreConejo(), energiaHijo, getVelocidad(), getPeso());
         eco.registrarNacimiento(hijo);
-        System.out.println("Conejo '" + getNombre() + "' se reprodujo -> nuevo conejo '"
-                + hijo.getNombre() + "' (energia: " + (int) energiaHijo + ")");
-        eco.contarEvento();
+        eco.registrarEvento("Conejo '" + getNombre() + "' se reprodujo -> nuevo conejo '"
+                + hijo.getNombre() + "' (energía: " + (int) energiaHijo + ")");
     }
 }

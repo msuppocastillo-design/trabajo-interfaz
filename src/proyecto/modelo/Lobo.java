@@ -1,9 +1,10 @@
+package modelo;
+
 import java.util.Random;
 
 /**
- * Depredador del ecosistema. No implementa Reproducible: los lobos no se
- * reproducen en esta simulación. Implementa Peligroso (bonus) porque
- * representa un riesgo para los conejos.
+ * Depredador del ecosistema. No implementa Reproducible. Implementa Peligroso
+ * porque representa un riesgo para los conejos.
  */
 public class Lobo extends Animal implements Peligroso {
 
@@ -27,11 +28,11 @@ public class Lobo extends Animal implements Peligroso {
     public void comer(Ecosistema eco) {
         Conejo objetivo = eco.buscarConejoVivoAleatorio();
         if (objetivo == null) {
-            System.out.println("Lobo '" + getNombre() + "' no encontró sus presas.");
+            eco.registrarEvento("Lobo '" + getNombre() + "' no encontró sus presas.");
             return;
         }
 
-        // La probabilidad de éxito AUMENTA con la energía del lobo (no es fija).
+        // La probabilidad de éxito aumenta con la energía del lobo.
         double probabilidad = PROB_BASE_CAZA + (getEnergia() / 150.0);
         if (eco.getClimaActual() == Clima.INVIERNO) {
             probabilidad += 0.20; // Invierno: caza con +20% de éxito
@@ -43,32 +44,25 @@ public class Lobo extends Animal implements Peligroso {
             setEnergia(getEnergia() + GANANCIA_CAZA_EXITOSA);
             exitosCaza++;
             eco.registrarMuerte(objetivo);
-            System.out.println("Lobo '" + getNombre() + "' cazó a un Conejo '" + objetivo.getNombre()
-                    + "' (+" + (int) GANANCIA_CAZA_EXITOSA + " energia) [cacerías: " + exitosCaza + "]");
-            eco.contarEvento();
+            eco.registrarEvento("Lobo '" + getNombre() + "' cazó al conejo '" + objetivo.getNombre()
+                    + "' (+" + (int) GANANCIA_CAZA_EXITOSA + " energía) [cacerías: " + exitosCaza + "]");
         } else {
-            System.out.println("Lobo '" + getNombre() + "' falló en la caceria");
-            eco.contarEvento();
+            eco.registrarEvento("Lobo '" + getNombre() + "' falló en la cacería");
         }
     }
 
     @Override
-    public void mostrarEstado() {
-        System.out.printf("Lobo '%s' (energia:%.1f, cacerías exitosas:%d)%n",
-                getNombre(), getEnergia(), exitosCaza);
-    }
+    public String getTipo() { return "Lobo"; }
 
-    public int getExitosCaza() {
-        return exitosCaza;
-    }
+    @Override
+    public String getDetalle() { return "Cacerías exitosas: " + exitosCaza; }
 
-    public void setExitosCaza(int exitosCaza) {
-        this.exitosCaza = Math.max(0, exitosCaza);
-    }
+    public int getExitosCaza() { return exitosCaza; }
+
+    public void setExitosCaza(int exitosCaza) { this.exitosCaza = Math.max(0, exitosCaza); }
 
     @Override
     public int getNivelPeligro() {
-        // A más cacerías exitosas y más energía, más peligroso.
         return exitosCaza * 2 + (int) (getEnergia() / 10);
     }
 }
