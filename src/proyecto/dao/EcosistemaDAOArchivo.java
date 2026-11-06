@@ -39,9 +39,7 @@ public class EcosistemaDAOArchivo implements EcosistemaDAO {
     private static final String SEC_HISTORIAL = "[HISTORIAL]";
     private static final String SEC_EVENTOS = "[EVENTOS]";
 
-    // ═════════════════════════════════════════════════════════
     //  LEER: archivo → Ecosistema
-    // ═════════════════════════════════════════════════════════
     @Override
     public Ecosistema cargar() throws DAOException {
         File archivo = new File(ARCHIVO);
@@ -134,9 +132,7 @@ public class EcosistemaDAOArchivo implements EcosistemaDAO {
         return eco;
     }
 
-    // ═════════════════════════════════════════════════════════
     //  ESCRIBIR: Ecosistema → archivo
-    // ═════════════════════════════════════════════════════════
     @Override
     public boolean guardar(Ecosistema eco) {
         try (BufferedWriter w = Files.newBufferedWriter(new File(ARCHIVO).toPath(), StandardCharsets.UTF_8)) {
@@ -181,9 +177,7 @@ public class EcosistemaDAOArchivo implements EcosistemaDAO {
         return !archivo.exists() || archivo.delete();
     }
 
-    // ═════════════════════════════════════════════════════════
     //  Conversión entidad ⇄ texto (privados)
-    // ═════════════════════════════════════════════════════════
 
     private String entidadATexto(Entidad e) {
         String base = e.getTipo() + SEP + e.getNombre() + SEP + e.getEnergia() + SEP + e.getEdad() + SEP + e.isViva();
@@ -233,7 +227,7 @@ public class EcosistemaDAOArchivo implements EcosistemaDAO {
         }
     }
 
-    // ---- utilidades de lectura de la cabecera ----
+    // utilidades de lectura de la cabecera 
 
     private String texto(Map<String, String> cab, String clave) throws DAOException {
         String v = cab.get(clave);

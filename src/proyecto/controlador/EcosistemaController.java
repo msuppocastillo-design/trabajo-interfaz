@@ -1,4 +1,4 @@
-package controlador;
+package proyecto.controlador;
 
 import dao.DAOException;
 import dao.EcosistemaDAO;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import modelo.Clima;
 import modelo.Ecosistema;
 import modelo.Entidad;
-import vista.EcosistemaView;
+import proyecto.vista.EcosistemaView;
 
 /**
  * CONTROLADOR: intermediario entre la Vista, el Modelo y el DAO.
@@ -26,9 +26,8 @@ public class EcosistemaController {
         this.dao = dao;
     }
 
-    // ═════════════════════════════════════════════════════════
+    
     //  FLUJO 1 · Arranque: retomar la simulación guardada (si hay)
-    // ═════════════════════════════════════════════════════════
     public void iniciar() {
         try {
             modelo = dao.cargar();                 // → DAO / ← Ecosistema armado, o null si no hay archivo
@@ -47,9 +46,7 @@ public class EcosistemaController {
         }
     }
 
-    // ═════════════════════════════════════════════════════════
     //  FLUJO 2 · Configuración inicial (todo llega como texto)
-    // ═════════════════════════════════════════════════════════
     public void iniciarSimulacion(String plantasTxt, String conejosTxt, String lobosTxt,
                                   String climaTxt, String turnosTxt) {
         Integer plantas = leerEntero(plantasTxt, "plantas", Ecosistema.MIN_PLANTAS, Ecosistema.MAX_PLANTAS);
@@ -78,9 +75,7 @@ public class EcosistemaController {
                 + lobos + " lobos. Presioná «Avanzar turno».");
     }
 
-    // ═════════════════════════════════════════════════════════
     //  FLUJO 3 · Avanzar turno
-    // ═════════════════════════════════════════════════════════
     public void avanzarTurno() {
         if (!hayEnCurso()) return;
 
@@ -96,9 +91,7 @@ public class EcosistemaController {
         }
     }
 
-    // ═════════════════════════════════════════════════════════
     //  FLUJO 4 · Intervención (cada 3 turnos)
-    // ═════════════════════════════════════════════════════════
     public void cambiarClima(String climaTxt) {
         if (!hayEnCurso() || !puedeIntervenirOAvisar()) return;
 
@@ -140,9 +133,7 @@ public class EcosistemaController {
         vista.mostrarMensaje("Se agregó un nuevo " + tipo.trim().toLowerCase() + " al ecosistema.");
     }
 
-    // ═════════════════════════════════════════════════════════
     //  FLUJO 5 · Nueva simulación / navegación / reporte
-    // ═════════════════════════════════════════════════════════
     public void nuevaSimulacion() {
         if (modelo != null && !modelo.isTerminada()) {
             if (!vista.confirmar("Hay una simulación en curso. ¿Querés descartarla y empezar una nueva?")) {
@@ -174,9 +165,7 @@ public class EcosistemaController {
         vista.mostrarPantalla("simulacion");
     }
 
-    // ═════════════════════════════════════════════════════════
     //  Auxiliares (privados)
-    // ═════════════════════════════════════════════════════════
 
     private void irAlReporte() {
         vista.actualizarReporte(modelo.generarReporte());   // ← Modelo calcula, → Vista muestra
