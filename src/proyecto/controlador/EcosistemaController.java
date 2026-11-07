@@ -1,11 +1,11 @@
 package proyecto.controlador;
 
-import dao.DAOException;
-import dao.EcosistemaDAO;
+import proyecto.dao.DAOException;
+import proyecto.dao.EcosistemaDAO;
 import java.util.ArrayList;
-import modelo.Clima;
-import modelo.Ecosistema;
-import modelo.Entidad;
+import proyecto.modelo.Clima;
+import proyecto.modelo.Ecosistema;
+import proyecto.modelo.Entidad;
 import proyecto.vista.EcosistemaView;
 
 /**

@@ -1,4 +1,4 @@
-package modelo;
+package proyecto.modelo;
 
 /**
  * Clase abstracta base de todas las entidades del ecosistema (Planta, Conejo, Lobo).
@@ -51,3 +51,4 @@ public abstract class Entidad {
 
     public void setViva(boolean viva) { this.viva = viva; }
 }
+

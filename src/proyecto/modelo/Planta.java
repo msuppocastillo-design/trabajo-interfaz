@@ -1,4 +1,4 @@
-package modelo;
+package proyecto.modelo;
 
 import java.util.Random;
 
@@ -72,3 +72,4 @@ public class Planta extends Entidad implements Reproducible {
         }
     }
 }
+

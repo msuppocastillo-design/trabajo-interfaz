@@ -1,4 +1,4 @@
-package modelo;
+package proyecto.modelo;
 
 /**
  * Climas posibles del ecosistema. Cada clima afecta distinto a plantas, conejos y lobos.
@@ -33,3 +33,4 @@ public enum Clima {
         return null;
     }
 }
+

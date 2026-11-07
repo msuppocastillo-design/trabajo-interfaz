@@ -1,4 +1,4 @@
-package dao;
+package proyecto.dao;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import modelo.Clima;
-import modelo.Conejo;
-import modelo.Ecosistema;
-import modelo.Entidad;
-import modelo.Lobo;
-import modelo.Planta;
+import proyecto.modelo.Clima;
+import proyecto.modelo.Conejo;
+import proyecto.modelo.Ecosistema;
+import proyecto.modelo.Entidad;
+import proyecto.modelo.Lobo;
+import proyecto.modelo.Planta;
 
 /**
  * DAO que guarda la simulación en un archivo de texto plano (ecosistema.txt),

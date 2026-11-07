@@ -1,4 +1,4 @@
-package modelo;
+package proyecto.modelo;
 
 import java.util.List;
 import java.util.Random;
@@ -83,3 +83,4 @@ public class Conejo extends Animal implements Reproducible {
                 + hijo.getNombre() + "' (energía: " + (int) energiaHijo + ")");
     }
 }
+

@@ -1,4 +1,4 @@
-package modelo;
+package proyecto.modelo;
 
 /**
  * Contrato para entidades que pueden reproducirse (Planta y Conejo).
@@ -18,3 +18,4 @@ public interface Reproducible {
         }
     }
 }
+

@@ -1,4 +1,4 @@
-package modelo;
+package proyecto.modelo;
 
 /**
  * Contrato para entidades que pueden morir de forma explícita (Conejo y Lobo).
@@ -26,3 +26,4 @@ public interface Mortal {
         return false;
     }
 }
+

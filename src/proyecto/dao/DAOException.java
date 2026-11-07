@@ -1,4 +1,4 @@
-package dao;
+package proyecto.dao;
 
 /**
  * Error de lectura/escritura del archivo o de datos inválidos.

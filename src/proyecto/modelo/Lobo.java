@@ -1,4 +1,4 @@
-package modelo;
+package proyecto.modelo;
 
 import java.util.Random;
 
@@ -66,3 +66,4 @@ public class Lobo extends Animal implements Peligroso {
         return exitosCaza * 2 + (int) (getEnergia() / 10);
     }
 }
+

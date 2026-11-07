@@ -1,6 +1,6 @@
-package dao;
+package proyecto.dao;
 
-import modelo.Ecosistema;
+import proyecto.modelo.Ecosistema;
 
 /**
  * Contrato del DAO: qué le puede pedir el Controlador, sin importar DÓNDE se guarda.

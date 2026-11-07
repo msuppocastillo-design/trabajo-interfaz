@@ -1,4 +1,4 @@
-package modelo;
+package proyecto.modelo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -479,3 +479,4 @@ public class Ecosistema {
         }
     }
 }
+

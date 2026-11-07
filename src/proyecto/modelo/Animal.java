@@ -1,4 +1,4 @@
-package modelo;
+package proyecto.modelo;
 
 /**
  * Capa intermedia entre Entidad y los animales concretos (Conejo, Lobo).
@@ -40,3 +40,4 @@ public abstract class Animal extends Entidad implements Mortal {
 
     public void setPeso(double peso) { this.peso = Math.max(0, peso); }
 }
+
