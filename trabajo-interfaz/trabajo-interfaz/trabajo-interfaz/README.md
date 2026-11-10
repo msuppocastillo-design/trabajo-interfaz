@@ -1,2 +1,0 @@
-# trabajo-interfaz
-trabajo practico 
